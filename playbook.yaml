@@ -14,6 +14,31 @@
     pip:
       name:
         - youtube_dl
+        - asciinema
       executable: pip3
     tags:
       - pip
+  - name: install stuff
+    package:
+      name:
+        - apache2-utils
+        - aptitude
+        - cmatrix
+        - curl
+        - evtest
+        - ffmpeg
+        - git
+        - jq
+        - lftp
+        - lm-sensors
+        - lxc
+        - mc
+        - ncdu
+        - python3-pip
+        - sl
+        - vim
+        - xclip
+        - tmux
+        - xmlstarlet
+        - zsh
+      state: present
