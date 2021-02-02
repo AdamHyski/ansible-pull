@@ -1,0 +1,19 @@
+---
+- name: install all
+  hosts: localhost
+  connection: local
+  become: yes
+  vars:
+    zsh_theme: nanotech.vimes
+    remote_user: adam.hyski
+  tasks:
+  - name: print
+    debug:
+      msg: "{{ansible_env}}"
+  - name: install youtube-dl & asciinema
+    pip:
+      name:
+        - youtube_dl
+      executable: pip3
+    tags:
+      - pip
