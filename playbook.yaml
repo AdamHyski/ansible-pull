@@ -3,9 +3,6 @@
   hosts: localhost
   connection: local
   become: yes
-  vars:
-    zsh_theme: nanotech.vimes
-    remote_user: adam.hyski
   tasks:
   - name: print
     debug:
@@ -22,7 +19,6 @@
     package:
       name:
         - apache2-utils
-        - aptitude
         - cmatrix
         - curl
         - evtest
