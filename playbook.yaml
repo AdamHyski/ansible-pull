@@ -4,6 +4,9 @@
   connection:     local
   become:         yes
   tasks:
+  - name:         print
+￼    debug:
+￼      msg:        "{{ansible_env}}"
   - name:         install youtube-dl & asciinema
     pip:
       name:
