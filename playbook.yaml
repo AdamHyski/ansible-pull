@@ -5,7 +5,7 @@
   become:         yes
   tasks:
   - debug:
-      msg:        "{{ansible_env}}"
+      msg:        "{{ansible_env.SUDO_USER}}"
   - name:         install youtube-dl & asciinema
     pip:
       name:
