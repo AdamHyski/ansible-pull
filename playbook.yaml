@@ -43,5 +43,5 @@
       name:       'ansible-pull '
       minute:     '27'
       hour:       '2'
-      user:       vimes
+      user:       ansible_env.SUDO_USER
       job:        ansible-pull -U 'https://github.com/AdamHyski/ansible-pull' playbook.yaml
