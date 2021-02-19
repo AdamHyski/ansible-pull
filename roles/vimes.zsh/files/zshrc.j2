@@ -76,8 +76,3 @@ source $ZSH/oh-my-zsh.sh
 PATH=$PATH:$HOME/bin
 
 export EDITOR=vim
-
-export ANSIBLE_REMOTE_USER={{ remote_user }}
-alias ave='ansible-vault edit --vault-id ~/.ansible_valt'
-alias avc='ansible-vault create --vault-id ~/.ansible_valt'
-alias av='ansible-vault --vault-id ~/.ansible_valt'
