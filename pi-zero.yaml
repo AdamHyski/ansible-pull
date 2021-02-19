@@ -25,12 +25,14 @@
         - xmlstarlet
         - zsh
       state:      present
+      
   - name:         install youtube-dl & asciinema
     pip:
       name:
         - youtube_dl
         - asciinema
       executable: pip3
+
   - name:         Add cron to do it daily
     cron:
       name:       'ansible-pull '
