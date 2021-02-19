@@ -25,7 +25,7 @@
         - xmlstarlet
         - zsh
       state:      present
-      
+
   - name:         install youtube-dl & asciinema
     pip:
       name:
@@ -43,4 +43,4 @@
 
   - name:         install oh-my-zsh
     import_role:
-      name: vimes.zsh
+      name:       vimes.zsh
