@@ -1,0 +1,47 @@
+---
+- name:           Ansible pull
+  hosts:          localhost
+  connection:     local
+  become:         yes
+  tasks:
+  # - debug:
+  #     msg:        "{{ansible_env}}"
+  - name:         install youtube-dl & asciinema
+    pip:
+      name:
+        - youtube_dl
+        - asciinema
+      executable: pip3
+    tags:
+      - pip
+  - name:         install stuff
+    package:
+      name:
+        - apache2-utils
+        - aptitude
+        - cmatrix
+        - curl
+        - evtest
+        - ffmpeg
+        - git
+        - jq
+        - lftp
+        - lm-sensors
+        - lxc
+        - mc
+        - ncdu
+        - python3-pip
+        - sl
+        - vim
+        - xclip
+        - tmux
+        - xmlstarlet
+        - zsh
+      state:      present
+  - name:         Add cron to do it daily
+    cron:
+      name:       'ansible-pull '
+      minute:     '27'
+      hour:       '2'
+      user:       "{{ansible_env.SUDO_USER}}"
+      job:        ansible-pull -U 'https://github.com/AdamHyski/ansible-pull' playbook.yaml
