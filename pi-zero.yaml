@@ -5,7 +5,7 @@
   become:         yes
   tasks:
   # - debug:
-  #     msg:        "{{ansible_env}}"
+  #     msg:      "{{ansible_env}}"
   - name:         install stuff
     package:
       name:
@@ -38,3 +38,7 @@
       hour:       '2'
       user:       "{{ansible_env.SUDO_USER}}"
       job:        ansible-pull -U 'https://github.com/AdamHyski/ansible-pull' pi-zero.yaml
+
+  - name:         install oh-my-zsh
+    import_role:
+      name: vimes.zsh
