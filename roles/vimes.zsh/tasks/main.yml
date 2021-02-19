@@ -1,0 +1,57 @@
+---
+# tasks file for vimes.zsh
+
+- name: Clone oh-my-zsh repo
+  become: "{{ansible_env.SUDO_USER}}"
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "/home/{{ansible_env.SUDO_USER}}/.oh-my-zsh"
+
+- name: create conf directory
+  file:
+    path: "/home/{{ansible_env.SUDO_USER}}/conf"
+    state: directory
+    owner: "{{ansible_env.SUDO_USER}}"
+    group: "{{ansible_env.SUDO_USER}}"
+
+- name: deploy .zshrc
+  template:
+    src: zshrc.j2
+    dest: "/home/{{ansible_env.SUDO_USER}}/conf/zshrc"
+    owner: "{{ansible_env.SUDO_USER}}"
+    group: "{{ansible_env.SUDO_USER}}"
+
+- name: deploy new theme
+  copy:
+    src: nanotech.vimes.zsh-theme
+    dest: "/home/{{ansible_env.SUDO_USER}}/.oh-my-zsh/themes/"
+    owner: "{{ansible_env.SUDO_USER}}"
+    group: "{{ansible_env.SUDO_USER}}"
+
+- name: remove standard zshrc
+  file:
+    path: "{{ansible_env.HOME}}/.zshrc"
+    state: absent
+    owner: "{{ansible_env.SUDO_USER}}"
+    group: "{{ansible_env.SUDO_USER}}"
+
+- name: Create conf folder in home directory
+  file:
+    path: "{{ansible_env.HOME}}/conf/"
+    state: directory
+    owner: "{{ansible_env.SUDO_USER}}"
+    group: "{{ansible_env.SUDO_USER}}"
+
+- name: symlink zshrc
+  become: "{{ansible_env.SUDO_USER}}"
+  file:
+    path: "/home/{{ansible_env.SUDO_USER}}/.zshrc"
+    src: "/home/{{ansible_env.SUDO_USER}}/conf/zshrc"
+    state: link
+    owner: "{{ansible_env.SUDO_USER}}"
+    group: "{{ansible_env.SUDO_USER}}"
+
+- name: Set zsh as default shell
+  user:
+    name: "{{ansible_env.SUDO_USER}}"
+    shell: /bin/zsh
