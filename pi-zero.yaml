@@ -20,8 +20,9 @@
         - mc
         - ncdu
         - python3-pip
-        - vim
+        - sl
         - tmux
+        - vim
         - xmlstarlet
         - zsh
       state:      present
