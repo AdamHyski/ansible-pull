@@ -20,6 +20,7 @@
         - mc
         - ncdu
         - python3-pip
+        - shairplay-sync
         - sl
         - tmux
         - vim
@@ -45,3 +46,15 @@
   - name:         install oh-my-zsh
     import_role:
       name:       vimes.zsh
+
+  - name:         Enable USB dongle
+    lineinfile:
+      path:       /usr/share/alsa/alsa.conf
+      regexp:     'defaults.ctl.card'
+      line:       'defaults.ctl.card 1'
+
+  - name:         Enable USB dongle
+    lineinfile:
+      path:       /usr/share/alsa/alsa.conf
+      regexp:     'defaults.pcm.card'
+      line:       'defaults.pcm.card 1'
