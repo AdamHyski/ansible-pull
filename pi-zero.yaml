@@ -23,7 +23,7 @@
         - mc
         - ncdu
         - python3-pip
-        - shairplay-sync
+        - shairport-sync
         - sl
         - tmux
         - vim
