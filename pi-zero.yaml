@@ -53,11 +53,11 @@
   - name:         Enable USB dongle
     lineinfile:
       path:       /usr/share/alsa/alsa.conf
-      regexp:     'defaults.ctl.card'
+      regexp:     'defaults.ctl.card 0'
       line:       'defaults.ctl.card 1'
 
   - name:         Enable USB dongle
     lineinfile:
       path:       /usr/share/alsa/alsa.conf
-      regexp:     'defaults.pcm.card'
+      regexp:     'defaults.pcm.card 0'
       line:       'defaults.pcm.card 1'
