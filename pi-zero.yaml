@@ -6,6 +6,9 @@
   tasks:
   # - debug:
   #     msg:      "{{ansible_env}}"
+  - name:     Change hostname
+    hostname:
+      name:   sypialnia
   - name:         install stuff
     package:
       name:
