@@ -1,11 +1,17 @@
 ---
 # tasks file for vimes.zsh
 
+- name:     check if installed
+  stat:
+    path:   /home/{{ansible_env.SUDO_USER}}/.oh-my-zsh
+  register: ohmyzsh_installed
+
 - name:     Clone oh-my-zsh repo
   become:   "{{ansible_env.SUDO_USER}}"
   git:
     repo:   https://github.com/robbyrussell/oh-my-zsh.git
     dest:   "/home/{{ansible_env.SUDO_USER}}/.oh-my-zsh"
+  when:     not ohmyzsh_installed.stat.exists
 
 - name:     create conf directory
   file:
@@ -13,6 +19,7 @@
     state:  directory
     owner:  "{{ansible_env.SUDO_USER}}"
     group:  "{{ansible_env.SUDO_USER}}"
+  when:     not ohmyzsh_installed.stat.exists
 
 - name:     deploy .zshrc
   template:
@@ -20,6 +27,7 @@
     dest:   "/home/{{ansible_env.SUDO_USER}}/conf/zshrc"
     owner:  "{{ansible_env.SUDO_USER}}"
     group:  "{{ansible_env.SUDO_USER}}"
+  when:     not ohmyzsh_installed.stat.exists
 
 - name:     deploy new theme
   copy:
@@ -27,6 +35,7 @@
     dest:   "/home/{{ansible_env.SUDO_USER}}/.oh-my-zsh/themes/"
     owner:  "{{ansible_env.SUDO_USER}}"
     group:  "{{ansible_env.SUDO_USER}}"
+  when:     not ohmyzsh_installed.stat.exists
 
 - name:     remove standard zshrc
   file:
@@ -34,6 +43,7 @@
     state:  absent
     owner:  "{{ansible_env.SUDO_USER}}"
     group:  "{{ansible_env.SUDO_USER}}"
+  when:     not ohmyzsh_installed.stat.exists
 
 - name:     Create conf folder in home directory
   file:
@@ -41,6 +51,7 @@
     state:  directory
     owner:  "{{ansible_env.SUDO_USER}}"
     group:  "{{ansible_env.SUDO_USER}}"
+  when:     not ohmyzsh_installed.stat.exists
 
 - name:     symlink zshrc
   become:   "{{ansible_env.SUDO_USER}}"
@@ -50,8 +61,10 @@
     state:  link
     owner:  "{{ansible_env.SUDO_USER}}"
     group:  "{{ansible_env.SUDO_USER}}"
+  when:     not ohmyzsh_installed.stat.exists
 
 - name:     Set zsh as default shell
   user:
     name:   "{{ansible_env.SUDO_USER}}"
     shell:  /bin/zsh
+  when:     not ohmyzsh_installed.stat.exists
