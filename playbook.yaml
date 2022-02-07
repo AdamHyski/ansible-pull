@@ -37,7 +37,15 @@
         - tmux
         - xmlstarlet
         - zsh
-      state:      present
+      state:      present  
+  - name: Set timezone variables
+    copy: 
+      content: 'Europe/Warsaw'
+      dest:     /etc/timezone
+      owner:    'root'
+      group:    'root'
+      mode:     '0644'
+      backup:   yes
   - name:         Add cron to do it daily
     cron:
       name:       'ansible-pull '
