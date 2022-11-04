@@ -12,7 +12,7 @@
     repo: deb https://repos.influxdata.com/debian buster stable 
     state: present
 
-- name: install stuff
+- name: install InfluxDB
   package:
     name:
       - influxdb
