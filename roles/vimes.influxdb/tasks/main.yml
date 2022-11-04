@@ -1,0 +1,19 @@
+---
+# tasks file for vimes.influxdb
+- name: Add key for influxdb
+  apt_key:
+    url: https://repos.influxdata.com/influxdb.key
+    state: present
+
+- name : Add influxdb to source list 
+  apt_repository:
+    #--- FIX ME ! 
+    # repo: deb https://repos.influxdata.com/debian $(lsb_release -cs) stable 
+    repo: deb https://repos.influxdata.com/debian buster stable 
+    state: present
+
+- name: install stuff
+  package:
+    name:
+      - influxdb
+    state: present
