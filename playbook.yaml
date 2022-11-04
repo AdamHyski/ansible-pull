@@ -55,9 +55,10 @@
       job:        ansible-pull -U 'https://github.com/AdamHyski/ansible-pull' playbook.yaml
   
   - name: Add key for influxdb
-    ansible.builtin.get_url:
+    ansible.builtin.apt_key:
       url: https://repos.influxdata.com/influxdb.key
-      dest: /etc/apt/trusted.gpg.d/influxdb.asc
+      # dest: /etc/apt/trusted.gpg.d/influxdb.asc
+      state: present
 
   - name : Add influxdb to source list 
     ansible.builtin.apt_repository:
@@ -68,9 +69,11 @@
       state: present
 
   - name: Add key for grafana
-    ansible.builtin.get_url:
+    ansible.builtin.apt_key:
       url: https://packages.grafana.com/gpg.key
-      dest: /etc/apt/trusted.gpg.d/grafana.asc
+      # dest: /etc/apt/trusted.gpg.d/grafana.asc
+      state: present
+
 
   - name : Add grafana to source list 
     ansible.builtin.apt_repository:

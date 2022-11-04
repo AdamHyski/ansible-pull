@@ -1,0 +1,32 @@
+---
+tasks:
+  - name: Add key for influxdb
+    ansible.builtin.get_url:
+      url: https://repos.influxdata.com/influxdb.key
+      dest: /etc/apt/trusted.gpg.d/influxdb.asc
+
+  - name : Add influxdb to source list 
+    ansible.builtin.apt_repository:
+      #--- FIX ME ! 
+      # repo: deb https://repos.influxdata.com/debian $(lsb_release -cs) stable 
+      repo: deb https://repos.influxdata.com/debian buster stable 
+      dest: /etc/apt/sources.list.d/influxdb.list
+      state: present
+
+  - name: Add key for grafana
+    ansible.builtin.get_url:
+      url: https://packages.grafana.com/gpg.key
+      dest: /etc/apt/trusted.gpg.d/grafana.asc
+
+  - name : Add grafana to source list 
+    ansible.builtin.apt_repository:
+      repo: deb https://packages.grafana.com/oss/deb stable main
+      dest: /etc/apt/sources.list.d/grafana.list
+      state: present
+
+  - name: install stuff
+    package:
+      name:
+        - influxdb
+        - grafana
+      state: present
