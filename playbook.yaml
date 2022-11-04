@@ -65,7 +65,7 @@
       #--- FIX ME ! 
       # repo: deb https://repos.influxdata.com/debian $(lsb_release -cs) stable 
       repo: deb https://repos.influxdata.com/debian buster stable 
-      dest: /etc/apt/sources.list.d/influxdb.list
+      # dest: /etc/apt/sources.list.d/influxdb.list
       state: present
 
   - name: Add key for grafana
@@ -78,7 +78,7 @@
   - name : Add grafana to source list 
     apt_repository:
       repo: deb https://packages.grafana.com/oss/deb stable main
-      dest: /etc/apt/sources.list.d/grafana.list
+      # dest: /etc/apt/sources.list.d/grafana.list
       state: present
 
   - name: install stuff
